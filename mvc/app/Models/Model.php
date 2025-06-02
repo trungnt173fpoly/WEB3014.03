@@ -1,4 +1,7 @@
 <?php 
+namespace App\Models;
+use PDO;
+use PDOException;
 class Model{
     // Ý tưởng: Tạo 1 lớp có kết nối csdl sẵn có và
     // cho các các trong model khác kế thừa
@@ -7,10 +10,10 @@ class Model{
     // 2. Cải tiến thêm
     // Tài nguyên cần cấp
     // Kết nối đến csdl MySQL = PDO
-    private $host = "localhost"; //địa chỉ mysql server sẽ kết nối đến
-    private $dbname="web3014.03"; //tên database sẽ kết nối đến
-    private $username = "root"; //username để kết nối đến database 
-    private $password = ""; // mật khẩu để kết nối đến database
+    // private $host = "localhost"; //địa chỉ mysql server sẽ kết nối đến
+    // private $dbname="web3014.03"; //tên database sẽ kết nối đến
+    // private $username = "root"; //username để kết nối đến database 
+    // private $password = ""; // mật khẩu để kết nối đến database
     // Tạo thuộc tính kết nối
     private $pdo;
     // thuôc tính lưu trữ câu lệnh sql
@@ -26,10 +29,10 @@ class Model{
     private function getConnection(){
         try{
             $connection = new PDO(
-                "mysql:host=$this->host; 
-                dbname=$this->dbname;", 
-                $this->username,
-                $this->password, 
+                "mysql:host={$_ENV['DB_HOST']}; 
+                dbname={$_ENV['DB_NAME']};", 
+                $_ENV['DB_USER'],
+                $_ENV['DB_PASS'], 
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
@@ -64,6 +67,34 @@ class Model{
         }catch(PDOException $exception){
             echo "Error: " . $exception->getMessage();
         }
+    }
+    // phương thức hỗ trợ truy vấn
+    // Lấy nhiều bản ghi
+    // Lấy 1 bản
+    // lấy hằng số để phân biệt chế độ fetch
+    const FETCH_ALL = "all";
+    const FETCH_FIRST = "first";
+    // Phương thức thực thi truy vấn và trả về kết quả
+    private function executeQuery($options = [], $fetchModel = self::FETCH_ALL){
+        $result = $this->execute($options);
+        if(!$result){
+            return false;
+        }else{
+            return $fetchModel == self::FETCH_ALL
+            ? $result->fetchAll(PDO::FETCH_OBJ) 
+            : $result->fetch(PDO::FETCH_OBJ);
+        }
+    }
+    protected function all($options = []){
+        return $this->executeQuery($options);      
+    }
+    protected function first($options = []){
+        return $this->executeQuery($options, self::FETCH_FIRST);
+    }
+    // Ngắt kết nối 
+    public function disconnect(){
+        $this->sta = null;
+        $this->pdo = null;
     }
 }
 
