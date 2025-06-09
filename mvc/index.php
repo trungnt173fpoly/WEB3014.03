@@ -26,4 +26,5 @@ include_once 'routers/web.php';
 // RewriteCond %{REQUEST_FILENAME} !-f
 // RewriteCond %{REQUEST_FILENAME} !-d
 // RewriteRule ^ index.php [QSA,L]
+var_dump($_SERVER);
 ?>
