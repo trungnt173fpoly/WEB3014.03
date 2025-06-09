@@ -6,7 +6,7 @@ if(!function_exists('storage')){
             basename($_SERVER['SCRIPT_NAME']),'', $_SERVER['SCRIPT_NAME']
          );
          return !empty($fileName) 
-         ? $path.'storage/upaload/'.$fileName 
+         ? $path.'storage/uploads/'.$fileName 
          : '';
     }
 }
@@ -31,5 +31,19 @@ if(!function_exists('route')){
     }
 }
 // Thông báo
-
+if(!function_exists('flash')){
+    function flash($key, $msg, $route){
+        $_SESSION[$key] = $msg;
+         switch($key){
+            case 'success':
+                unset($_SESSION['errors']);
+                break;
+            case 'erorrs':
+                unset($_SESSION['success']);
+                break;          
+        }
+        header('location:'.route($route).'?msg'.$key);
+        die;
+    }
+}
 ?>
