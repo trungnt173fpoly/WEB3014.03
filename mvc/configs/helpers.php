@@ -38,11 +38,11 @@ if(!function_exists('flash')){
             case 'success':
                 unset($_SESSION['errors']);
                 break;
-            case 'erorrs':
+            case 'errors':
                 unset($_SESSION['success']);
                 break;          
         }
-        header('location:'.route($route).'?msg'.$key);
+        header('location:'.route($route).'?msg='.$key);
         die;
     }
 }

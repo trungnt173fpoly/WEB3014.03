@@ -10,7 +10,7 @@
 // include 'app/Models/Product.php';
 
 use Dotenv\Dotenv;
-
+session_start();
 include_once 'vendor/autoload.php';
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -26,5 +26,5 @@ include_once 'routers/web.php';
 // RewriteCond %{REQUEST_FILENAME} !-f
 // RewriteCond %{REQUEST_FILENAME} !-d
 // RewriteRule ^ index.php [QSA,L]
-var_dump($_SERVER);
+// var_dump($_SERVER);
 ?>

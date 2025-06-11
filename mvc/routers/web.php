@@ -14,5 +14,10 @@ $router->get('/danh-bai', function(){
 // phương_thức: get/post/...
 // Lưu ý nhớ use class cần dùng
 $router->get('/product', ProductController::class.'@index');
+// Thêm
+// Hiển thị form 
+$router->get('/product/add', ProductController::class.'@create');
+// Xử lý 
+$router->post('/product/add', ProductController::class.'@store');
 $router->run();
 ?>

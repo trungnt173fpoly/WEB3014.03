@@ -1,8 +1,18 @@
 @extends('layout')
 @section('title', $title)
 @section('content')
+@php
+
+@endphp
+    @if (isset($_SESSION['errors']))
+        @foreach ($_SESSION['errors'] as  $error)
+        <div>
+            <span>{{$error}}</span>
+        </div>
+        @endforeach
+    @endif
     <h1>{{$title}}</h1>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="{{route('product/add')}}" method="post" enctype="multipart/form-data">
         <div>
             <label for="">Tên sản phẩm</label>
             <input type="text" name="name" placeholder="Nhâp tên sản phẩm">
@@ -26,5 +36,6 @@
                 <option value="2">Dừng hoạt động</option>
             </select>
         </div>
+        <button type="submit" value="save" name="btnSave">Save</button>
     </form>
 @endsection
