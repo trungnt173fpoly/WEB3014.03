@@ -19,5 +19,10 @@ $router->get('/product', ProductController::class.'@index');
 $router->get('/product/add', ProductController::class.'@create');
 // Xử lý 
 $router->post('/product/add', ProductController::class.'@store');
+// Hiển thị form 
+$router->get('/product/edit/{id}', ProductController::class.'@edit');
+// Xử lý 
+$router->post('/product/edit/{id}', ProductController::class.'@update');
+$router->get('/product/delete/{id}', ProductController::class.'@delete');
 $router->run();
 ?>

@@ -21,5 +21,23 @@ class Product extends Model{
         return $this->conn->first([$id]);
     }
     // Làm thêm sửa xóa
+    public function addProduct($id, $name, $price, $image, $quantity, $status){
+         $sql = "INSERT INTO $this->table(`id`, `name`, `price`, `image`, `quantity`, `status`) 
+         VALUES (?,?,?,?,?,?)";
+        $this->conn->setSql( $sql);
+        return $this->conn->execute([$id, $name, $price, $image, $quantity, $status]);
+    }
+    public function deleteProduct($id){
+        $sql = "DELETE FROM $this->table WHERE id = ?";
+        $this->conn->setSql( $sql);
+        return $this->conn->execute([$id]);
+    }
+    public function updateProuct($name, $price, $image, $quantity, $status, $id){
+            $sql = "UPDATE `products` SET `name`= ?,
+            `price`= ?,`image`= ?,`quantity`= ?,
+            `status`= ? WHERE `id`= ?";
+        $this->conn->setSql( $sql);
+        return $this->conn->execute([$name, $price, $image, $quantity, $status, $id]);
+    }
 }
-?>
+?>]
