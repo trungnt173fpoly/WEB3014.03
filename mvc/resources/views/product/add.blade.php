@@ -28,7 +28,7 @@
         </div>
         <div>
             <label for="">Hình ảnh sản phẩm</label>
-            <input type="file" name="imgae">
+            <input type="file" name="image">
         </div>
         <div>
             <label for="">Số lượng sản phẩm</label>
