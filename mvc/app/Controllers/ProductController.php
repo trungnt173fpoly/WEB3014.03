@@ -30,7 +30,7 @@ class ProductController extends Controller{
             $errors[] = "Bạn cần thêm tên sản phẩm";
         }
         // Tương tự với giá, số lượng và trạng thái
-        if($_FILES["imgae"]['error'] != 0 || $_FILES["imgae"]['size'] == 0){
+        if($_FILES["image"]['error'] != 0 || $_FILES["image"]['size'] == 0){
             $errors[] = "Bạn cần tải ảnh lên hoăc quá trình tải ảnh lên bị lỗi";
         }
         if(count($errors) > 0){
@@ -38,10 +38,10 @@ class ProductController extends Controller{
         }else{
             // upload ảnh
             $targetDir = __DIR__.'/../../storage/uploads/';
-            $newFileName = time()."_".$_FILES["imgae"]["name"];
+            $newFileName = time()."_".$_FILES["image"]["name"];
             // var_dump($newFileName);
             // die;
-            move_uploaded_file($_FILES["imgae"]["tmp_name"],  $targetDir.$newFileName);
+            move_uploaded_file($_FILES["image"]["tmp_name"],  $targetDir.$newFileName);
             if(!file_exists($targetDir.$newFileName)){
                 $errors[] = "Lỗi upload ảnh";
                 flash('errors', $errors, 'product/add');
@@ -79,15 +79,15 @@ class ProductController extends Controller{
             $errors[] = "Bạn cần thêm tên sản phẩm";
         }
         // Tương tự với giá, số lượng và trạng thái
-        if($_FILES["imgae"]['error'] != 0 || $_FILES["imgae"]['size'] == 0){
+        if($_FILES["image"]['error'] != 0 || $_FILES["image"]['size'] == 0){
             $newFileName = $product->image;
         }else{
             // upload ảnh
             $targetDir = __DIR__.'/../../storage/uploads/';
-            $newFileName = time()."_".$_FILES["imgae"]["name"];
+            $newFileName = time()."_".$_FILES["image"]["name"];
             // var_dump($newFileName);
             // die;
-            move_uploaded_file($_FILES["imgae"]["tmp_name"],  $targetDir.$newFileName);
+            move_uploaded_file($_FILES["image"]["tmp_name"],  $targetDir.$newFileName);
             if(!file_exists($targetDir.$newFileName)){
                 $errors[] = "Lỗi upload ảnh";
                 flash('errors', $errors, 'product/edit/'.$id);
@@ -97,7 +97,7 @@ class ProductController extends Controller{
             flash('errors', $errors, 'product/edit/'.$id);
         }else{
                 $modePro = new Product();
-                if($modePro->updateProuct(
+                if($modePro->updateProduct(
                 $_POST['name'], 
                 $_POST['price'],
                 $newFileName,

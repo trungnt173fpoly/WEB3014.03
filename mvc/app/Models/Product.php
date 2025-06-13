@@ -32,7 +32,7 @@ class Product extends Model{
         $this->conn->setSql( $sql);
         return $this->conn->execute([$id]);
     }
-    public function updateProuct($name, $price, $image, $quantity, $status, $id){
+    public function updateProduct($name, $price, $image, $quantity, $status, $id){
             $sql = "UPDATE `products` SET `name`= ?,
             `price`= ?,`image`= ?,`quantity`= ?,
             `status`= ? WHERE `id`= ?";
@@ -40,4 +40,4 @@ class Product extends Model{
         return $this->conn->execute([$name, $price, $image, $quantity, $status, $id]);
     }
 }
-?>]
+?>
