@@ -26,7 +26,7 @@
         <div>
             <label for="">Hình ảnh sản phẩm</label>
             <img src="{{storage($product->image)}}" width="100px" height="100px" alt="">
-            <input type="file" name="imgae">
+            <input type="file" name="image">
         </div>
         <div>
             <label for="">Số lượng sản phẩm</label>
